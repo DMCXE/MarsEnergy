@@ -4,7 +4,7 @@ __pycache__/
 .venv/
 /build/
 
-# 演示文稿、方案文档和演示用衍生图
+# Presentations, proposal documents, and slide graphics
 *.ppt
 *.pptx
 *.pdf
