@@ -1,0 +1,62 @@
+{
+  "p1": {
+    "label": "Outpost deployment",
+    "ready": 2035,
+    "in": [
+      "Heat-pipe power modules",
+      "Crew stores and consumables",
+      "Survey instruments"
+    ],
+    "out": [
+      "Optional sealed science samples"
+    ]
+  },
+  "alpha": {
+    "label": "Base Alpha expansion",
+    "ready": 2042,
+    "in": [
+      "Additional heat-pipe modules",
+      "Crew stores and maintenance kits",
+      "Survey equipment for base expansion"
+    ],
+    "out": [
+      "Optional follow-up science samples"
+    ]
+  },
+  "p2": {
+    "label": "Brayton station deployment",
+    "ready": 2045,
+    "in": [
+      "Power conversion assemblies",
+      "Turbomachinery and handling frames",
+      "Service spares"
+    ],
+    "out": [
+      "Materials samples",
+      "Returned instruments"
+    ]
+  },
+  "dfr": {
+    "label": "Dual-fluid alternative",
+    "ready": 2060,
+    "in": [
+      "Industrial power modules",
+      "Specialist plant components"
+    ],
+    "out": [
+      "Materials qualification coupons"
+    ]
+  },
+  "fusion": {
+    "label": "Fusion commissioning",
+    "ready": 2060,
+    "in": [
+      "Qualified fusion components",
+      "Commissioning equipment"
+    ],
+    "out": [
+      "Servicing hardware",
+      "Research samples"
+    ]
+  }
+}

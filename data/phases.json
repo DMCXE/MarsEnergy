@@ -1,0 +1,46 @@
+{
+  "p1": {
+    "name": "Heat-pipe microreactor",
+    "era": "2035–45 · outpost concept",
+    "kw": 40,
+    "efficiency": 0.22,
+    "hot": 800,
+    "cold": 400,
+    "note": "Heat pipes carry heat to a converter and vertical fins. Dust tolerance and shielding require site tests.",
+    "inbound": "Power modules, crew stores and survey equipment",
+    "outbound": "Optional scientific sample return"
+  },
+  "p2": {
+    "name": "Gas-cooled Brayton station",
+    "era": "2045–60 · industrial concept",
+    "kw": 5000,
+    "efficiency": 0.35,
+    "hot": 1150,
+    "cold": 600,
+    "note": "Helium carries heat to an intermediate exchanger and closed Brayton power block. The working fluid requires purification and compression.",
+    "inbound": "Conversion equipment, turbomachinery and spares",
+    "outbound": "Materials samples and returned instruments"
+  },
+  "dfr": {
+    "name": "Dual-fluid station",
+    "era": "P2+/3B · fission alternative",
+    "kw": 20000,
+    "efficiency": 0.27,
+    "hot": 1273,
+    "cold": 780,
+    "note": "Separate hot circuits, a standby supply and an insulated drain vault are shown. Materials qualification is a deployment gate.",
+    "inbound": "Industrial power modules and specialist components",
+    "outbound": "Materials qualification coupons"
+  },
+  "fusion": {
+    "name": "Magnetic fusion station",
+    "era": "2060–75+ · conditional scenario",
+    "kw": 100000,
+    "efficiency": 0.35,
+    "hot": 1150,
+    "cold": 600,
+    "note": "The fusion heat collection system feeds a separate power cycle. Deployment depends on terrestrial demonstration, serviceability and a viable fuel inventory.",
+    "inbound": "Qualified fusion components and commissioning equipment",
+    "outbound": "Servicing hardware and research samples"
+  }
+}

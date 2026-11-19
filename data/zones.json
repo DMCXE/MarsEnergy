@@ -1,0 +1,90 @@
+[
+  {
+    "key": "A",
+    "name": "Habitat",
+    "x": -0.7,
+    "z": 0.85,
+    "color": "#68d5ab",
+    "rgb": [
+      36,
+      152,
+      105
+    ],
+    "early": 75,
+    "alpha": 150,
+    "role": "Protected life support, medical and essential communications."
+  },
+  {
+    "key": "B1",
+    "name": "Science",
+    "x": 0.4,
+    "z": 0.68,
+    "color": "#70c5ff",
+    "rgb": [
+      60,
+      149,
+      200
+    ],
+    "early": 20,
+    "alpha": 120,
+    "role": "Laboratories and assay equipment. Defer noncritical experiments during a shortage."
+  },
+  {
+    "key": "B2",
+    "name": "Cultivation",
+    "x": 0.55,
+    "z": 1.55,
+    "color": "#f49cbc",
+    "rgb": [
+      174,
+      94,
+      137
+    ],
+    "early": 25,
+    "alpha": 230,
+    "role": "Food and cultivation lighting. Essential crew systems remain on the vital bus."
+  },
+  {
+    "key": "C",
+    "name": "Water pilot",
+    "x": -2.3,
+    "z": -1.55,
+    "color": "#63dce1",
+    "rgb": [
+      51,
+      166,
+      167
+    ],
+    "early": 40,
+    "alpha": 100,
+    "role": "Water processing and an optional waste-heat connection."
+  },
+  {
+    "key": "D",
+    "name": "Cargo pad",
+    "x": 2.35,
+    "z": -1,
+    "color": "#ffab71",
+    "rgb": [
+      184,
+      115,
+      72
+    ],
+    "early": 20,
+    "alpha": 400,
+    "role": "Proposed cargo delivery point with dispatchable fabrication and propellant processing."
+  },
+  {
+    "key": "E",
+    "name": "Power park",
+    "x": -2.9,
+    "z": -2.05,
+    "color": "#f2cb72",
+    "rgb": [
+      208,
+      159,
+      76
+    ],
+    "role": "Firm generating capacity. PV is supplementary."
+  }
+]

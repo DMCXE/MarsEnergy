@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+/build/
+
+# 演示文稿、方案文档和演示用衍生图
+*.ppt
+*.pptx
+*.pdf
+*.doc
+*.docx
+/docs/
+/backups/
+/assets/renders/slides/

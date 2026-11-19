@@ -1,0 +1,38 @@
+{
+  "gale": {
+    "name": "Gale crater",
+    "coord": "4.5895° S · 137.4417° E",
+    "lat": -4.5895,
+    "lon": 137.4417,
+    "ref": "Bradbury Landing",
+    "kind": "Curiosity touchdown, 2012",
+    "source": "USGS Gale merged DEM v3 · 1 m product grid",
+    "url": "https://astrogeology.usgs.gov/search/map/mars_msl_gale_merged_dem_1m",
+    "water": "Assay hydrated minerals and measure pilot extraction energy.",
+    "exag": 6
+  },
+  "arcadia": {
+    "name": "Arcadia Planitia",
+    "coord": "39° N · 188° E",
+    "lat": 39,
+    "lon": 188,
+    "ref": "Study centre",
+    "kind": "Candidate study coordinate",
+    "source": "MOLA MEGT44N180HB · 128 pixels/degree",
+    "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt44n180hb.lbl",
+    "water": "Regional ice indicators motivate a subsurface survey. Ice depth and yield at this point are unknown.",
+    "exag": 3
+  },
+  "utopia": {
+    "name": "Utopia Planitia",
+    "coord": "46° N · 117° E",
+    "lat": 46,
+    "lon": 117,
+    "ref": "Study centre",
+    "kind": "Candidate study coordinate",
+    "source": "MOLA MEGT88N090HB · 128 pixels/degree",
+    "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt88n090hb.lbl",
+    "water": "A regional ice deposit has an estimated 1–10 m cover. The study coordinate needs an independent survey.",
+    "exag": 12
+  }
+}
