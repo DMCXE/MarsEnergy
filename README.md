@@ -1,6 +1,6 @@
 # MarsEnergy 3D
 
-Procedural 3D assets for the MarsEnergy project. This repository contains 11 binary glTF 2.0 models, 11 matching transparent PNGs, and 13 renders of Mars bases, equipment, and cargo scenes.
+Procedural 3D assets for the MarsEnergy project. This repository contains 12 binary glTF 2.0 models, 12 matching transparent PNGs, and 13 renders of Mars bases, equipment, and cargo scenes.
 
 ## Source and outputs
 
@@ -26,6 +26,7 @@ Pass `--asset` more than once to select several asset groups. The `greenhouse` a
 | `geology` | Zone C clay kiln at Gale | [Model](assets/renders/custom/p1_zone_c_gale_clay_kiln.glb) | <a href="assets/renders/custom/p1_zone_c_gale_clay_kiln.png"><img src="assets/renders/custom/p1_zone_c_gale_clay_kiln.png" alt="Zone C clay kiln at Gale" width="240"></a> |
 | `cansat` | CanSat telemetry demonstration | [Model](assets/renders/custom/p1_cansat_rocket_telemetry.glb) | <a href="assets/renders/custom/p1_cansat_rocket_telemetry.png"><img src="assets/renders/custom/p1_cansat_rocket_telemetry.png" alt="CanSat telemetry demonstration" width="240"></a> |
 | `campus` | Campus blackout drill diorama | [Model](assets/renders/custom/p2_campus_blackout_diorama.glb) | <a href="assets/renders/custom/p2_campus_blackout_diorama.png"><img src="assets/renders/custom/p2_campus_blackout_diorama.png" alt="Campus blackout drill diorama" width="240"></a> |
+| [Separate generator](#regenerate-the-pwo3-cutaway) | pwO3 stellarator cutaway | [Model](assets/renders/custom/pwo3_stellarator_cutaway.glb) | <a href="assets/renders/custom/pwo3_stellarator_cutaway.png"><img src="assets/renders/custom/pwo3_stellarator_cutaway.png" alt="pwO3 stellarator cutaway showing the coils, vessel, and plasma" width="240"></a> |
 
 ### Scene renders
 
@@ -55,7 +56,7 @@ python3 -m venv .venv
 .venv/bin/python scripts/custom_assets/build.py
 ```
 
-The default build generates all models and renders the PNGs at 12 samples per pixel. To preview the two greenhouse operating modes, use the command below. It writes the results to `build/greenhouse/`.
+The default `build.py` command generates all groups listed under `--asset` and renders the PNGs at 12 samples per pixel. To preview the two greenhouse operating modes, use the command below. It writes the results to `build/greenhouse/`.
 
 ```sh
 .venv/bin/python scripts/custom_assets/build.py --asset greenhouse --width 900 --samples 4 --out build/greenhouse
@@ -76,3 +77,16 @@ python3 scripts/render_plates.py \
 ```
 
 To regenerate the input assets, run the [planet texture script](scripts/prepare_planets.py) or the [Mars terrain script](scripts/prepare_terrain.py). The terrain script requires internet access and `curl`. See the [asset catalog and credits](assets/README.md) for the original imagery and survey data sources.
+
+### Regenerate the pwO3 cutaway
+
+The cutaway uses five bodies from the local `pwO3_120mm_multicolor.3mf` teaching model. The coil body contains 16 separate windings. The other bodies are the vacuum vessel, blanket, first wall, and plasma. The generator adds a display deck, coil supports, and service hardware. The GLB records the source file's SHA-256 in its metadata.
+
+Use Python 3.12 with the dependencies above, plus SciPy and VTK. Replace the example path with the location of your local 3MF file.
+
+```sh
+.venv/bin/python -m pip install scipy==1.16.3 vtk==9.3.1
+.venv/bin/python scripts/custom_assets/stellarator_cutaway.py \
+  --source /path/to/pwO3_120mm_multicolor.3mf \
+  --out build/pwo3
+```

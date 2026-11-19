@@ -95,7 +95,11 @@ V hemisphere(V n,Random &rand){
     float z=std::sqrt(rand.get()),r=std::sqrt(1-z*z),a=6.283185f*rand.get();
     return u*(r*std::cos(a))+v*(r*std::sin(a))+n*z;
 }
-const V key=norm({-.65f,-.61f,1.05f}),rim=norm({.91f,.66f,.74f});
+struct StudioLamp {V toward,tint;float power;};
+std::vector<StudioLamp> studio={
+    {norm({-.65f,-.61f,1.05f}),{1.f,.935f,.84f},1.32f},
+    {norm({.91f,.66f,.74f}),{.48f,.89f,1.f},.70f}
+};
 float noise(int x,int y,int z){
     uint32_t h=uint32_t(x)*1597334677u ^ uint32_t(y)*3812015801u ^ uint32_t(z)*2798796415u;
     h^=h>>16;h*=2246822519u;h^=h>>13;return float(h>>8)/16777216.f;
@@ -122,12 +126,13 @@ V shade(const Ray &ray,const Hit &hit,Random &rand){
     if(m.texture>0)color=color*(1+m.texture*(.32f*grain(p,12)+.25f*grain(p,54)+.17f*grain(p,210)));
     V light=V{.40f,.44f,.50f}*(ao*(.79f+.21f*n.z));
     V spec={0,0,0};
-    for(int i=0;i<2;i++){
-        V l=norm((i?rim:key)+hemisphere(i?rim:key,rand)*(i?.19f:.26f));
-        V tint=i?V{.48f,.89f,1.0f}:V{1.0f,.935f,.84f};
+    for(size_t i=0;i<studio.size();i++){
+        const auto &lamp=studio[i];
+        V l=norm(lamp.toward+hemisphere(lamp.toward,rand)*(i==0?.26f:i==1?.19f:.65f));
+        V tint=lamp.tint;
         float facing=max(0.f,dot(n,l));
         if(facing>.001f&&trace(Ray(start,l),32,true).id<0){
-            light=light+tint*(facing*(i?.70f:1.32f));
+            light=light+tint*(facing*lamp.power);
             float exponent=7+66*(1-m.rough);
             float highlight=std::pow(max(0.f,dot(n,norm(l-ray.d))),exponent);
             spec=spec+tint*(highlight*(.07f+.43f*m.metal));
@@ -176,6 +181,8 @@ int main(int argc,char **argv){
     if(argc!=5)return 1;
     FILE *f=fopen(argv[1],"rb");if(!f)return 2;
     uint32_t h[4];read(f,h,4);V eye,axes[3];read(f,&eye,1);read(f,axes,3);
+    uint32_t count=0;read(f,&count,1);
+    if(count){studio.resize(count);read(f,studio.data(),count);}
     mats.resize(h[1]);lamps.resize(h[2]);read(f,mats.data(),mats.size());read(f,lamps.data(),lamps.size());
     tris.reserve(h[0]);
     for(unsigned i=0;i<h[0];i++){
