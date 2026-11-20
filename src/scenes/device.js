@@ -1,4 +1,5 @@
 function sampleGround(m,section){
+  m.group?.('Regolith plinth');
   // A clipped geological sample exposes the lower service hardware in section.
   const industrial=state.phase==='p2'||state.phase==='fusion';
   const ring=(a,r,y)=>{
@@ -59,7 +60,9 @@ function radiatorWing(m,a,canopy,dust){
   m.rod(radial(.34,.17,a),pt(.38,.05),.036,metal.steel);
 }
 function heatPipePlant(m){
+  m.group?.('Equipment/Buried module');
   pressureVessel(m,0,0,-1.66,.52,1.62,metal.titanium);
+  m.group?.('Equipment/Converter head');
   flange(m,0,-.45,0,.64);
   m.drum(0,.27,0,.33,.88,metal.ceramic);
   for(let i=0;i<4;i++){
@@ -69,8 +72,13 @@ function heatPipePlant(m){
     m.pipe([radial(.27,-1.2,a),radial(.57,-1.02,a),radial(.57,.25,a),[x,.34,z],[x,.51,z]],.065,metal.brass);
   }
   flange(m,0,1.04,0,.50);
-  for(let i=0;i<6;i++)radiatorWing(m,i*tau/6+.16,state.umbrellaMode,state.dustTau);
+  for(let i=0;i<6;i++){
+    m.group?.(`Equipment/Radiator wings/Wing ${i+1}`);
+    radiatorWing(m,i*tau/6+.16,state.umbrellaMode,state.dustTau);
+  }
+  m.group?.('Equipment/Converter head');
   m.drum(0,1.39,0,.29,.62,metal.steel);
+  m.group?.('Equipment/Heat service and controls');
   m.pipe([[.32,-.33,.21],[1.15,-.33,.55],[1.62,-1.15,.85],[2.13,-1.15,.85]],.08,metal.copper);
   m.rod([2.04,-1.15,.85],[2.15,-1.15,.85],.135,metal.steel,16);
   m.pipe([[-1.5,-.66,.95],[-1.5,-.66,.52],[-.37,-.66,.52],[-.37,-.53,.22]],.046,metal.dark);
@@ -93,7 +101,9 @@ function heatExchangerBank(m,x,z,y,count){
   for(const h of [.05,1.23])m.rod([x-.1,y+h,z+.47],[x+(count-1)*.25+.1,y+h,z+.47],.075,metal.copper);
 }
 function braytonPlant(m){
+  m.group?.('Equipment/Service deck');
   deck(m,0,0,-.27,5.2,3.4);
+  m.group?.('Equipment/Helium vessel');
   const x=-1.18,z=-.27;
   pressureVessel(m,x,z,-.17,.77,2.73,metal.ceramic);
   flange(m,x,1.68,z,.84);
@@ -105,6 +115,7 @@ function braytonPlant(m){
     m.rod(pt(.81,.07),pt(.89,-.18),.089,metal.steel);
     m.rod(pt(.778,.44),pt(.778,1.55),.017,metal.titanium,6);
   }
+  m.group?.('Equipment/Intermediate exchanger');
   pressureVessel(m,.45,-.9,-.15,.40,1.9,metal.steel,state.soilCutaway);
   if(state.soilCutaway){
     for(let i=0;i<9;i++){
@@ -115,10 +126,12 @@ function braytonPlant(m){
     m.drum(.45,1.42,-.9,.32,.08,metal.dark);
   }
   flange(m,.45,1.25,-.9,.46);
+  m.group?.('Equipment/Primary transfer lines');
   for(const [height,mat] of [[1.98,metal.titanium],[.73,metal.copper]]){
     m.pipe([[x+.52,height,z],[x+.9,height,z],[.45,height,-.36],[.45,height-.32,-.68]],.13,mat);
   }
   // Shaft-line housings on a common skid; collars identify the casing breaks.
+  m.group?.('Equipment/Brayton power block');
   const y=.42,axisZ=.81,left=.12,right=2.24;
   m.box(1.18,-.015,axisZ,2.45,.13,1.00,metal.dark);
   for(const px of [.46,1.78])m.box(px,.17,axisZ,.27,.38,.68,metal.steel);
@@ -131,9 +144,11 @@ function braytonPlant(m){
     m.rod([1.44,yy,zz],[2.15,yy,zz],.026,metal.titanium,6);
   }
   m.pipe([[.45,.95,-.51],[.45,.95,.02],[.30,.95,.48],[.30,.66,.72]],.092,metal.titanium);
+  m.group?.('Equipment/Heat exchanger bank');
   heatExchangerBank(m,1.07,-1.04,-.15,5);
   m.pipe([[.85,.55,.47],[1.05,.55,.12],[1.05,-.05,-.57]],.075,metal.copper);
   m.pipe([[2.14,1.08,-.57],[2.37,1.08,-.27],[2.37,.20,.34],[2.13,.20,.60]],.067,metal.steel);
+  m.group?.('Equipment/Service rails and controls');
   serviceRail(m,[[-2.35,-.17,.43],[-2.35,-.17,1.44],[-1.36,-.17,1.44],[-.42,-.17,1.44]]);
   serviceCabinet(m,1.92,-.17,-.24,.75);
   m.feature([x,1.70,z],'Helium vessel','The removable head, circumferential flange and jacket surround the primary heat source.');
@@ -141,17 +156,20 @@ function braytonPlant(m){
   m.feature([1.59,.66,.90],'Brayton power block','Turbomachinery and generator share a shaft-line skid. The fins, coupling guard and mounting feet show the separate serviceable housings.');
 }
 function dualFluidPlant(m){
+  m.group?.('Equipment/Service deck and retaining walls');
   deck(m,0,0,-.16,4.85,3.35);
   // Retaining walls and a bearing slab support the receivers below the deck.
   m.box(1.48,-1.60,.48,1.43,.11,1.02,metal.concrete);
   m.box(1.48,-.91,-.01,1.43,1.35,.11,metal.concrete);
   m.box(.83,-.91,.47,.10,1.35,1.0,metal.concrete);
+  m.group?.('Equipment/Two-fluid vessel/Outer jacket');
   const x=-.43,z=-.22;
   const start=state.soilCutaway?1.62:0,end=state.soilCutaway?tau-.22:tau;
   m.shell(x,z,[[.68,-.26],[.95,.04],[1.00,.25],[1.00,1.7],[.95,1.88],[.66,2.06],[.22,2.16]],metal.titanium,start,end,42);
   m.shell(x,z,[[.98,.22],[1.035,.22],[1.035,.32],[.98,.32]],metal.dark,start,end);
   m.shell(x,z,[[.97,1.65],[1.055,1.65],[1.055,1.77],[.97,1.77]],metal.steel,start,end);
   if(state.soilCutaway){
+    m.group?.('Equipment/Two-fluid vessel/Inner channel bundle');
     m.drum(x,.85,z,.58,1.73,metal.graphite);
     for(let j=0;j<8;j++){
       const a=j*tau/8;
@@ -159,19 +177,24 @@ function dualFluidPlant(m){
       m.rod([px,.14,pz],[px,1.63,pz],.083,state.leadDrainDone?metal.steel:metal.ceramic);
     }
   }
+  m.group?.('Equipment/Two-fluid vessel/Vessel head');
   for(const r of [.41,.32,.23])m.drum(x,2.16+(.41-r),z,r,.09,metal.dark);
   const supply=state.drainDrill==='blackout'?metal.red:metal.teal;
+  m.group?.('Equipment/Drain receivers');
   for(let i=0;i<2;i++){
     const px=1.30+i*.54;
     pressureVessel(m,px,.48,-1.61,.24,.92,metal.steel);
     m.pipe([[x+.38,-.16,z+.18],[x+.38,-.54,.25],[px,-.74,.48],[px,-.87,.48]],.082,state.leadDrainDone?metal.brass:metal.titanium);
   }
+  m.group?.('Equipment/Heat exchanger');
   pressureVessel(m,1.26,-.65,-.04,.39,1.94,metal.graphite);
   flange(m,1.26,1.40,-.65,.46);
   m.pipe([[x+.47,1.91,z],[.44,1.91,z],[.64,1.59,-.13],[1.26,1.59,-.31]],.13,metal.titanium);
   m.pipe([[1.26,.38,-.34],[1.26,.38,.24],[.73,.38,.48],[x+.64,.38,.35]],.12,metal.copper);
+  m.group?.('Equipment/Heat exchanger bank');
   heatExchangerBank(m,-1.65,-1.15,-.04,5);
   m.pipe([[-1.58,1.16,-.68],[-1.94,1.16,-.57],[-1.94,.46,-.22],[-1.31,.46,-.22]],.067,metal.copper);
+  m.group?.('Equipment/Standby supply and controls');
   serviceCabinet(m,1.65,-.04,1.04,1);
   m.box(1.65,.51,1.295,.29,.056,.04,supply);
   m.pipe([[1.64,.10,1.16],[1.24,.10,1.16],[.52,.10,.74],[.35,.32,.60]],.049,supply);
@@ -183,6 +206,7 @@ function dualFluidPlant(m){
 }
 function fusionStation(m){
   const y=.55,major=1.23, cut=state.soilCutaway;
+  m.group?.('Equipment/Service deck');
   deck(m,0,0,-.26,4.95,4.05);
   const arc=(start,end,r,h,mat,tube)=>{
     m.surface(12,54,(u,v)=>{
@@ -190,13 +214,19 @@ function fusionStation(m){
       return radial(r+tube*Math.cos(b),h+tube*Math.sin(b),a);
     },mat);
   };
+  m.group?.('Equipment/Vacuum vessel/Outer casing');
   arc(cut?1.64:0,cut?tau-.15:tau,major,y,metal.steel,.48);
-  if(cut)arc(-.15,1.64,major,y,state.tritiumIgnited?metal.glass:metal.graphite,.27);
+  if(cut){
+    m.group?.('Equipment/Vacuum vessel/Exposed chamber');
+    arc(-.15,1.64,major,y,state.tritiumIgnited?metal.glass:metal.graphite,.27);
+  }
+  m.group?.('Equipment/Central column');
   m.drum(0,.70,0,.32,2.0,metal.dark);
   for(let k=0;k<9;k++)m.drum(0,.02+k*.18,0,.34,.082,metal.copper,28);
   // Extrude each D-shaped coil in its radial plane. Small axial bands show the winding pack.
   for(let i=0;i<14;i++){
     const a=i*tau/14,skip=cut&&i>0&&i<4;
+    m.group?.(`Equipment/Toroidal-field coils/Coil bay ${i+1}`);
     const profile=[[.53,-.71],[.90,-.77],[1.39,-.70],[1.83,-.46],[2.00,-.13],[2.04,.28],[1.89,.70],[1.55,.98],[1.12,1.08],[.65,.99],[.53,.86]];
     if(!skip){
       for(let j=0;j<profile.length;j++){
@@ -214,7 +244,9 @@ function fusionStation(m){
     }
     if(i%2===0){const [x,,z]=radial(1.65,0,a);m.box(x,-.03,z,.32,.33,.34,metal.dark,a)}
   }
+  m.group?.('Equipment/Annular manifolds');
   for(const h of [-.11,1.53])arc(cut?1.62:0,cut?tau-.16:tau,1.74,h,metal.copper,.073);
+  m.group?.('Equipment/Service port');
   const a=.56,port=radial(2.40,.54,a);
   m.rod(radial(1.63,.54,a),port,.196,metal.titanium,24);
   m.rod(port,radial(2.48,.54,a),.24,metal.dark,24);
@@ -224,12 +256,14 @@ function fusionStation(m){
     const b=j*tau/8, shift=[-.207*Math.cos(b)*Math.sin(a),.207*Math.sin(b),.207*Math.cos(b)*Math.cos(a)];
     m.rod(vadd(port,shift),vadd(tip,shift),.025,metal.bright,6);
   }
+  m.group?.('Equipment/Cooling lines and exchanger bank');
   for(const i of [0,3,6,9,12]){
     const b=i*tau/14+.16;
     m.pipe([radial(1.85,.19,b),radial(2.12,.19,b),radial(2.12,-.12,b),radial(1.94,-.12,b+.2)],.041,metal.teal);
   }
   heatExchangerBank(m,-1.92,-1.53,-.16,4);
   m.pipe([[-1.23,.54,-.22],[-2.19,.54,-.22],[-2.19,1.09,-.92],[-1.91,1.09,-1.05]],.083,metal.steel);
+  m.group?.('Equipment/Service cabinet');
   serviceCabinet(m,-1.72,-.16,1.12,.83);
   m.feature(radial(1.7,1.44,2.1),'Field coils','D-shaped toroidal-field coils wrap the vacuum vessel. Curved casings, winding packs and support shoes are visible around the ring.');
   m.feature(radial(1.24,.71,cut?.85:2.4),'Vacuum vessel','The ring chamber sits inside the magnet assembly. Section view removes a sector of the casing and coils to expose the chamber region.');

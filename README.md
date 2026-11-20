@@ -1,6 +1,6 @@
 # MarsEnergy 3D
 
-Procedural 3D assets for the MarsEnergy project. This repository contains 12 binary glTF 2.0 models, 12 matching transparent PNGs, and 13 renders of Mars bases, equipment, and cargo scenes.
+Procedural 3D assets for the MarsEnergy project. This repository contains 17 binary glTF 2.0 models, 17 matching transparent PNGs, and 13 renders of Mars bases, equipment, and cargo scenes.
 
 ## Source and outputs
 
@@ -26,6 +26,11 @@ Pass `--asset` more than once to select several asset groups. The `greenhouse` a
 | `geology` | Zone C clay kiln at Gale | [Model](assets/renders/custom/p1_zone_c_gale_clay_kiln.glb) | <a href="assets/renders/custom/p1_zone_c_gale_clay_kiln.png"><img src="assets/renders/custom/p1_zone_c_gale_clay_kiln.png" alt="Zone C clay kiln at Gale" width="240"></a> |
 | `cansat` | CanSat telemetry demonstration | [Model](assets/renders/custom/p1_cansat_rocket_telemetry.glb) | <a href="assets/renders/custom/p1_cansat_rocket_telemetry.png"><img src="assets/renders/custom/p1_cansat_rocket_telemetry.png" alt="CanSat telemetry demonstration" width="240"></a> |
 | `campus` | Campus blackout drill diorama | [Model](assets/renders/custom/p2_campus_blackout_diorama.glb) | <a href="assets/renders/custom/p2_campus_blackout_diorama.png"><img src="assets/renders/custom/p2_campus_blackout_diorama.png" alt="Campus blackout drill diorama" width="240"></a> |
+| [Scene exporter](#export-the-device-scenes) | P1 plant with vertical radiators | [Model](assets/renders/custom/p1_vertical.glb) | <a href="assets/renders/custom/p1_vertical.png"><img src="assets/renders/custom/p1_vertical.png" alt="P1 plant with vertical radiators" width="240"></a> |
+| [Scene exporter](#export-the-device-scenes) | P1 plant with dust-covered umbrella radiators | [Model](assets/renders/custom/p1_umbrella_dust.glb) | <a href="assets/renders/custom/p1_umbrella_dust.png"><img src="assets/renders/custom/p1_umbrella_dust.png" alt="P1 plant with dust-covered umbrella radiators" width="240"></a> |
+| [Scene exporter](#export-the-device-scenes) | P2 Brayton-cycle plant | [Model](assets/renders/custom/p2_brayton.glb) | <a href="assets/renders/custom/p2_brayton.png"><img src="assets/renders/custom/p2_brayton.png" alt="P2 Brayton-cycle plant" width="240"></a> |
+| [Scene exporter](#export-the-device-scenes) | DFR power station, drained state | [Model](assets/renders/custom/dfr_station.glb) | <a href="assets/renders/custom/dfr_station.png"><img src="assets/renders/custom/dfr_station.png" alt="DFR power station in the drained state" width="240"></a> |
+| [Scene exporter](#export-the-device-scenes) | Fusion power station cutaway | [Model](assets/renders/custom/fusion_station.glb) | <a href="assets/renders/custom/fusion_station.png"><img src="assets/renders/custom/fusion_station.png" alt="Fusion power station cutaway" width="240"></a> |
 | [Separate generator](#regenerate-the-pwo3-cutaway) | pwO3 stellarator cutaway | [Model](assets/renders/custom/pwo3_stellarator_cutaway.glb) | <a href="assets/renders/custom/pwo3_stellarator_cutaway.png"><img src="assets/renders/custom/pwo3_stellarator_cutaway.png" alt="pwO3 stellarator cutaway showing the coils, vessel, and plasma" width="240"></a> |
 
 ### Scene renders
@@ -77,6 +82,16 @@ python3 scripts/render_plates.py \
 ```
 
 To regenerate the input assets, run the [planet texture script](scripts/prepare_planets.py) or the [Mars terrain script](scripts/prepare_terrain.py). The terrain script requires internet access and `curl`. See the [asset catalog and credits](assets/README.md) for the original imagery and survey data sources.
+
+### Export the device scenes
+
+The [device exporter](scripts/custom_assets/device_assets.py) reads the same JavaScript geometry and presets as the five equipment scene renders. It exports named equipment groups and a separate regolith plinth for each GLB. The geometry uses illustrative display units. The P1 vertical and umbrella configurations share one camera, scale, and plinth position so they can be compared side by side.
+
+Install the Python dependencies above and make sure Node.js is on your `PATH`. The command writes the five GLBs and their 2400 × 1600 transparent PNGs to `build/devices/`.
+
+```sh
+.venv/bin/python scripts/custom_assets/device_assets.py --out build/devices
+```
 
 ### Regenerate the pwO3 cutaway
 
